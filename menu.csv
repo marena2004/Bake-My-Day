@@ -1,0 +1,35 @@
+id,menu,price,stock
+B1,Lemon tart,75,12
+B2,Apple pie,75,12
+B3,Croissant,85,10
+B4,Pain au chocolate,95,14
+B5,Pain aux raisins,80,16
+B6,Cinnamon roll,65,14
+B7,Pretzel,35,18
+B8,Grains bagel,35,14
+B9,Strawberry shortcake,75,19
+B10,Tiramisu cake,85,13
+B11,Swiss roll,70,15
+B12,Opera cake,80,5
+B13,Castella,70,17
+B14,New york cheesecake,90,10
+B15,Basque cheesecake,90,12
+B16,Blueberries cheesecake,95,12
+B17,Salted caramel cheesecake,85,17
+B18,Chocolate chunk cookie,50,20
+B19,White chocolate macadamia cookie,65,14
+B20,Biscoff cookie,45,12
+B21,Raspberry macaron,35,18
+B22,Vanilla macaron,35,13
+B23,Matcha macaron,35,11
+B24,Chocolate macaron,35,10
+B25,Hazelnut macaron,35,12
+B26,Pistachio macaron,35,10
+D1,Espresso,59,20
+D2,Americano,69,12
+D3,Cappuccino,69,14
+D4,Latte,69,20
+D5,Mocha,69,19
+D6,Macchiato,69,13
+D7,Chocolate,59,10
+D8,Matcha latte,79,12
