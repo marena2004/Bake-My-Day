@@ -28,5 +28,3 @@ class Product:
     def update_stock(self, stock: int, use: int):
         stock -= use
         return stock
-
-
