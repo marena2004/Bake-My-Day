@@ -6,15 +6,6 @@ from datetime import datetime
 class Orders:
     def __init__(self):
         self.__order = {}
-        self.__data_lst = []
-
-    @property
-    def data_lst(self):
-        return self.__data_lst
-
-    @data_lst.setter
-    def data_lst(self, data_lst):
-        self.__data_lst = data_lst
 
     @property
     def order(self):
@@ -24,27 +15,24 @@ class Orders:
     def order(self, order):
         self.__order = order
 
-    def add_menu(self):
-        choose = input("Please choose your happiness: ")
+    def add_menu(self, choose):
         for data in Product().readfile():
             if choose == data["id"]:
                 amount = int(input(f"How many {data['menu']} do you want?: "))
-                if Product().check_stock(int(data["stock"]), amount):
-                    Product().update_stock(int(data["stock"]), amount)
+                if Product().check_stock(int(data["stock"]), amount):  # check whether menu available or not
+                    Product().update_stock(int(data["stock"]), amount)  # update stock
                     self.__order.update({data["menu"]: {"id": data["id"],
                                                         "quantity": amount,
                                                         "subtotal": int(data["price"]) * amount}})
                     print(f"Add {amount} {data['menu']} to the cart.")
                     return self.__order
                 else:
-                    print(f"{data['menu']} not available.")
+                    return False
 
-    def delete(self):
-        print(self.__order)
-        choose = input("Which one do you want to delete?: ")
+    def delete(self, choose):
         for menu, info in self.__order.copy().items():
             if choose == info["id"]:
-                self.__order.pop(menu)
+                self.__order.pop(menu)  # remove unwanted menu from card
                 print(f'{menu} has been removed.')
 
     def sub_total(self):
@@ -66,7 +54,7 @@ class Orders:
         return self.sub_total()
 
     def cancel(self):
-        self.__order.clear()
+        self.__order.clear()  # delete all orders
         print("Cancel successfully.")
 
     def get_id_order(self):
@@ -74,13 +62,14 @@ class Orders:
         number = '1234567890'
         use_for = upper_case + number
         length = 15
-        id_order = ''.join(random.sample(use_for, length))
+        id_order = ''.join(random.sample(use_for, length))  # create id order
         return id_order
 
     def receipt(self):
         now = datetime.now()
+        day = now.date()
         time = now.strftime("%H:%M")
-        with open("order_receipt.txt", "w") as f:
+        with open("order_receipt.txt", "w") as f:  # write receipt in text file
             f.write(" " * 25 + "B A K E  M Y  D A Y\n\n")
             f.write(" " * 19 + "Thank you for ordering our product!\n\n")
             f.write(f"Order #{self.get_id_order()}\n\n")
@@ -100,7 +89,7 @@ class Orders:
                 elif not pay == 'b' or 'c':
                     print("Please enter b or c only")
                     pay = input("Do you want to pay by Bank Transfer(b) or Credit Card(c)?: ")
-            f.write(f"Shipping fee: 0.00฿" + " ".ljust(39, " ") + f"Order date: {now.date()}\n")
+            f.write(f"Shipping fee: 0.00฿" + " ".ljust(39, " ") + f"Order date: {day}\n")
             f.write(f"Discount: {self.discount():.2f}฿".ljust(58, " ") + f"Time: {time}\n")
             f.write(f"Total: {self.total():.2f}฿\n\n")
             f.write(f"Shipping to:\n")
