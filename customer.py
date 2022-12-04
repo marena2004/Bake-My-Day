@@ -1,11 +1,11 @@
 import json
 
 
-class Customer:
-    def __init__(self, name, username, password):
-        self.__username = username
-        self.__password = password
-        self.__name = name
+class Database:
+    def __init__(self):
+        self.__username = ""
+        self.__password = ""
+        self.__name = ""
 
     @property
     def username(self):
@@ -35,14 +35,11 @@ class Customer:
 
         else:
             for k, v in data.items():
-                if v["Username"] == self.__username and v["Password"] == self.__password:
+                if self.username in v["Username"] and self.password in v["Password"]:
                     print("Login successful!")
-
-                elif v["Username"] and v["Password"] not in data:
-                    print("No data for your account, please register.")
-
-                else:
+                if self.username not in v["Username"] and self.password not in v["Password"]:
                     print("Incorrect password or username, please try again")
+                    break
 
     def register(self):
         self.__name = input("Please enter your name: ")
@@ -50,8 +47,8 @@ class Customer:
         self.__password = input("Create your password: ")
 
         new_data = {self.__name: {"Username": self.__username,
-                                  "Password": self.__password}
-
+                                  "Password": self.__password
+                                  }
                     }
         try:
             with open("users.json", "r") as f:
@@ -59,29 +56,24 @@ class Customer:
         except FileNotFoundError:
             with open("users.json", "w") as f:
                 json.dump(new_data, f, indent=4)
-                print("Account created successfully!")
-
         else:
             data.update(new_data)
             with open("users.json", "w") as f:
                 json.dump(data, f, indent=4)
                 print("Account created successfully!")
 
-    def remove(self, name):
-        self.__name == input("Please enter your name: ")
-        try:
-            with open("users.json", "r") as f:
-                data = json.load(f)
-
-        except FileNotFoundError:
-            print("No data for your account")
-
-        else:
-            if name == self.__name:
-                for n in list(data):
-                    data.pop(n)
-                    with open("users.json", "w") as f:
-                        json.dump(data, f, indent=4)
-            else:
-                print("No data for your account")
+    def user(self):
+        print("(1)Login | (2)Register")
+        select = int(input("Please select the number: "))
+        while True:
+            if select == "":
+                print("Enter only number!")
+                select = int(input("Please select the number: "))
+            elif select == 1:
+                return self.login()
+            elif select == 2:
+                return self.register()
+            elif 1 > select or select > 2:
+                print("Invalid number")
+                select = int(input("Please select the number: "))
 
