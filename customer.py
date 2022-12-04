@@ -37,9 +37,6 @@ class Database:
             for k, v in data.items():
                 if self.username in v["Username"] and self.password in v["Password"]:
                     print("Login successful!")
-                if self.username not in v["Username"] and self.password not in v["Password"]:
-                    print("Incorrect password or username, please try again")
-                    break
 
     def register(self):
         self.__name = input("Please enter your name: ")
@@ -56,7 +53,7 @@ class Database:
         except FileNotFoundError:
             with open("users.json", "w") as f:
                 json.dump(new_data, f, indent=4)
-        else:
+        else:  # create new account
             data.update(new_data)
             with open("users.json", "w") as f:
                 json.dump(data, f, indent=4)
