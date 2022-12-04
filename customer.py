@@ -60,7 +60,7 @@ class Database:
                 print("Account created successfully!")
 
     def user(self):
-        print("(1)Login | (2)Register")
+        print("(1)Log in | (2)Register")
         select = int(input("Please select the number: "))
         while True:
             if select == "":
