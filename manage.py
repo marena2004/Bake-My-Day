@@ -35,27 +35,27 @@ class Orders:
                 self.__order.pop(menu)  # remove unwanted menu from card
                 print(f'{menu} has been removed.')
 
-    def sub_total(self):
+    def cancel(self):
+        self.__order.clear()  # delete all orders
+        print("Cancel successfully.")
+
+    def subtotal(self):
         total_price = 0
         for menu, info in self.__order.items():
             total_price += int(info["subtotal"])
         return total_price
 
     def discount(self):
-        if self.sub_total() >= 300:
-            dis = self.sub_total() * 0.1
+        if self.subtotal() >= 300:
+            dis = self.subtotal() * 0.1
             return dis
         return 00.00
 
     def total(self):
-        if self.sub_total() >= 300:
-            total = self.sub_total() - self.discount()
+        if self.subtotal() >= 300:
+            total = self.subtotal() - self.discount()
             return total
-        return self.sub_total()
-
-    def cancel(self):
-        self.__order.clear()  # delete all orders
-        print("Cancel successfully.")
+        return self.subtotal()
 
     def get_id_order(self):
         upper_case = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -81,10 +81,10 @@ class Orders:
             pay = input("Do you want to pay by Bank Transfer(b) or Credit Card(c)?: ")
             while True:
                 if pay == 'b':
-                    f.write(f"Subtotal: {self.sub_total():.2f}฿".ljust(58, " ") + f"Payment: Bank Transfer\n")
+                    f.write(f"Subtotal: {self.subtotal():.2f}฿".ljust(58, " ") + f"Payment: Bank Transfer\n")
                     break
                 elif pay == 'c':
-                    f.write(f"Subtotal: {self.sub_total():.2f}฿".ljust(58, " ") + f"Payment: Credit Card\n")
+                    f.write(f"Subtotal: {self.subtotal():.2f}฿".ljust(58, " ") + f"Payment: Credit Card\n")
                     break
                 elif not pay == 'b' or 'c':
                     print("Please enter b or c only")
@@ -110,4 +110,3 @@ class Orders:
             f.write(f"{address.title()}\n")
             f.write("-" * 80 + "\n")
             f.write(" " * 24 + "H A V E  A  N I C E  D A Y!")
-
