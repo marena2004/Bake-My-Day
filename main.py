@@ -61,9 +61,6 @@ def show_menu():  # create menu bar
             break
         elif str(choose) == "q":
             break
-        else:
-            print("Invalid number, please try again.")
-            choose = int(input('enter: '))
 
 
 def purchase():
@@ -84,7 +81,7 @@ def purchase():
         if choices == 2:
             choose = input("Please choose your happiness: ")
             if not cart.add_menu(choose):
-                print("Out of stock,please another menu.")
+                print("Product out of stock, please select another menu.")
             else:
                 print("(1) Show menu\n(2) Add menu\n(3) Delete menu\n(4) Cancel\n(5) Payment")
                 choices = int(input("Please select the choices: "))
